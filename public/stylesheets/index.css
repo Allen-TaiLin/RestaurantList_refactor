@@ -99,3 +99,7 @@ header {
   }
   
 }
+
+.delete-btn:hover, .detail-btn:hover, .edit-btn:hover, .btn-info:hover, .btn-warning:hover, .btn-danger:hover {
+  transform: scale(1.2);
+}

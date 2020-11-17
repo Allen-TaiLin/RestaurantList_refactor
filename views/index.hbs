@@ -1,17 +1,35 @@
 <!-- search bar -->
-<div class="container search-bar">
-  <div class="search-bar-outer">
-    <div class="search-bar-inner">
-      <form action="/search">
-        <h4 class="mb-2">尋找餐廳：</h4>
-        <div class="input-group">
-          <input type="text" name="keyword" value="{{keyword}}" class="form-control" placeholder="輸入餐廳、分類"
-            aria-label="Restaurant Name..." aria-describedby="search-button">
-          <div class="input-group-append">
-            <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
-          </div>
+<div class="row d-flex justify-content-center">
+  <div class="col-7 d-flex justify-content-end">
+    <div class="container search-bar">
+      <div class="search-bar-outer" style="margin-right: 0px;">
+        <div class="search-bar-inner">
+          <form action="/search">
+            <h4 class="mb-2">尋找餐廳：</h4>
+            <div class="input-group">
+              <input type="text" name="keyword" value="{{keyword}}" class="form-control" placeholder="輸入餐廳、分類"
+                aria-label="Restaurant Name..." aria-describedby="search-button">
+              <div class="input-group-append">
+                <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+              </div>
+            </div>
+          </form>
         </div>
-      </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-2" style="margin: 0px;">
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        排序方式
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/sort?item=_id&sort=asc">A -> Z</a>
+        <a class="dropdown-item" href="/sort?item=_id&sort=desc">Z -> A</a>
+        <a class="dropdown-item" href="/sort?item=category&sort=asc">類別</a>
+        <a class="dropdown-item" href="/sort?item=region&sort=asc">地區</a>
+      </div>
     </div>
   </div>
 </div>
@@ -54,8 +72,10 @@
                   </form>
                 </div>
                 <div class="col-4 p-0">
-                  <form action="/restaurants/{{ this._id }}/delete" method="POST">
-                    <button type="submit" class="edit-btn" id="delete-btn"><i class="far fa-trash-alt"></i>
+                  <form action="/restaurants/{{ this._id }}?_method=DELETE" method="POST"
+                    onsubmit="return deleteAlert()">
+                    <button type="submit" class="delete-btn" id="delete-btn">
+                      <i class="far fa-trash-alt"></i>
                       Delete
                     </button>
                   </form>

@@ -24,20 +24,10 @@ handlebars.registerHelper('if_equal', function (job, expectedJob, options) {
   }
   return options.inverse(this);
 })
-//設定連線字串
-//mongoose.connect('mongodb://localhost/restaurant-list-refactor', { useNewUrlParser: true, useUnifiedTopology: true })
-// 取得資料庫連線狀態
-//const db = mongoose.connection
-// 連線異常
-// db.on('error', () => {
-//   console.log('mongodb error!')
-// })
-// // 連線成功
-// db.once('open', () => {
-//   console.log('mongodb connected!')
-// })
+
 
 // routes setting
+//首頁
 app.get('/', (req, res) => {
   RestaurantData.find() // 取出 restaurant model 裡的所有資料
     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
@@ -45,11 +35,31 @@ app.get('/', (req, res) => {
     .catch((error) => console.log(error)) // 錯誤處理
 })
 
+//搜尋功能
+app.get('/search', (req, res) => {
+  //取得keyword
+  const keyword = req.query.keyword
+  //資料庫撈資料
+  RestaurantData.find()
+    .lean()
+    .then((restaurants) => {
+      //查詢符合keyword的店家
+      restaurants = restaurants.filter((item) => {
+        return (item.name.toLowerCase().trim().includes(keyword.toLowerCase().trim())) || (item.category.toLowerCase().trim().includes(keyword.toLowerCase().trim()))
+      })
+      //讀取index檔案、渲染畫面
+      return res.render('index', { restaurants: restaurants, keyword })
+    })
+    .catch((error) => console.log(error))
+})
+
+//新增頁面
 app.get('/restaurants/new', (req, res) => {
   //讀取new檔案、渲染畫面
   return res.render('new')
 })
 
+//確定新增
 app.post('/restaurants/new', (req, res) => {
   // 從 req.body 拿出表單裡的資料
   const options = req.body

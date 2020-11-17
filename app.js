@@ -108,17 +108,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .catch((error) => console.log(error))  //例外處理
 })
 
-//刪除
-app.post('/restaurants/:id/delete', (req, res) => {
-  //取得restaurant_id
-  const id = req.params.id
-  RestaurantData.findById(id)  //從資料庫找出相關資料
-    .then((restaurant) => restaurant.remove())  //刪除資料
-    .then(() => res.redirect('/'))  //導向首頁
-    .catch((error) => console.log(error))  //例外處理
-})
 
-// start and listen on the Express server
 app.listen(port, () => {
   console.log(`Express is listening on http://localhost:${port}`)
 })

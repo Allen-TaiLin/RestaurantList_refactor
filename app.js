@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 //   console.log('mongodb connected!')
 // })
 
-
+// routes setting
 app.get('/', (req, res) => {
   RestaurantData.find() // 取出 restaurant model 裡的所有資料
     .lean() // 把 Mongoose 的 Model 物件轉換成乾淨的 JavaScript 資料陣列
@@ -38,7 +38,32 @@ app.get('/', (req, res) => {
     .catch((error) => console.log(error)) // 錯誤處理
 })
 
+app.get('/restaurants/new', (req, res) => {
+  //讀取new檔案、渲染畫面
+  return res.render('new')
+})
 
+app.post('/restaurants/new', (req, res) => {
+  // 從 req.body 拿出表單裡的資料
+  const options = req.body
+  //建立實例模型
+  const restaurantAddNew = new RestaurantData({
+    name: options.name,
+    category: options.category,
+    image: options.image,
+    location: options.location,
+    phone: options.phone,
+    google_map: options.google_map,
+    rating: options.rating,
+    description: options.description,
+    region: options.region
+  })
+
+  //將實例存入資料庫
+  return restaurantAddNew.save()
+    .then(() => res.redirect('/'))
+    .catch((error) => console.log(error))
+})
 
 app.listen(port, () => {
   console.log(`Express is listening on http://localhost:${port}`)

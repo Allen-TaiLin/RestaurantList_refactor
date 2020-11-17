@@ -65,6 +65,17 @@ app.post('/restaurants/new', (req, res) => {
     .catch((error) => console.log(error))
 })
 
+//讀取特定資料
+app.get('/restaurants/:id/detail', (req, res) => {
+  //取得restaurant_id
+  const id = req.params.id
+  RestaurantData.findById(id)  //從資料庫找出相關資料
+    .lean()  //把資料轉成javascript物件
+    .then((restaurant) => res.render('detail', { restaurant: restaurant }))  //發送至前端樣板
+    .catch((error) => console.log(error))  //例外處理
+})
+
+
 app.listen(port, () => {
   console.log(`Express is listening on http://localhost:${port}`)
 })

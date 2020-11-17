@@ -22,7 +22,7 @@
     <div class="col-md-10 col-12 mx-auto">
       <div class="card-columns">
         {{#each restaurants}}
-        <a href="/restaurant/{{this._id}}/detail" class="text-secondary">
+        <a href="/restaurants/{{this._id}}/detail" class="text-secondary">
           <div class="card mb-3">
             <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}">
             <div class="card-body p-3">
@@ -38,7 +38,7 @@
             <div class="card-footer">
               <div class="row">
                 <div class="col-4">
-                  <form action="/restaurant/{{ this._id }}/edit" method="GET">
+                  <form action="/restaurants/{{ this._id }}/edit" method="GET">
                     <button type="submit" class="edit-btn">
                       <i class="fas fa-pen-square"></i>
                       Edit
@@ -46,7 +46,7 @@
                   </form>
                 </div>
                 <div class="col-4 p-0">
-                  <form action="/restaurant/{{this._id}}/detail" method="GET">
+                  <form action="/restaurants/{{this._id}}/detail" method="GET">
                     <button type="submit" class="detail-btn">
                       <i class="fas fa-outdent"></i>
                       Detail
@@ -54,7 +54,7 @@
                   </form>
                 </div>
                 <div class="col-4 p-0">
-                  <form action="/restaurant/{{ this._id }}/delete" method="POST">
+                  <form action="/restaurants/{{ this._id }}/delete" method="POST">
                     <button type="submit" class="edit-btn" id="delete-btn"><i class="far fa-trash-alt"></i>
                       Delete
                     </button>

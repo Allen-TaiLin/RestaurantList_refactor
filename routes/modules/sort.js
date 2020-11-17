@@ -17,7 +17,6 @@ router.get('/', (req, res) => {
     .sort({ [item]: sortBy })  //排序
     .then((restaurants) => res.render('index', { restaurants: restaurants }))  //將資料傳給 index 樣板
     .catch((error) => console.log(error))  //例外處理
-
 })
 
 // 匯出路由模組

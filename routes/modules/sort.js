@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
   RestaurantData.find()
     .lean()
     .sort({ [item]: sortBy })  //排序
-    .then((restaurants) => res.render('index', { restaurants: restaurants }))  //將資料傳給 index 樣板
+    .then((restaurants) => res.render('index', { restaurants }))  //將資料傳給 index 樣板
     .catch((error) => console.log(error))  //例外處理
 })
 

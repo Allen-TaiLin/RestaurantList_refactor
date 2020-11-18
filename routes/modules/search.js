@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
         return (item.name.toLowerCase().trim().includes(keyword.toLowerCase().trim())) || (item.category.toLowerCase().trim().includes(keyword.toLowerCase().trim()))
       })
       //讀取index檔案、渲染畫面
-      return res.render('index', { restaurants: restaurants, keyword })
+      return res.render('index', { restaurants, keyword })
     })
     .catch((error) => console.log(error))
 })

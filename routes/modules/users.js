@@ -14,6 +14,7 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', (rea, res) => {
+  const { name, email, password, confirmPassword } = req.body
 
 })
 

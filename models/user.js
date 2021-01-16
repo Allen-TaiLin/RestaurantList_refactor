@@ -1,9 +1,9 @@
-//載入套件
+// 載入套件
 const mongoose = require('mongoose')
-//使用mongoose.Schema
+// 使用mongoose.Schema
 const Schema = mongoose.Schema
 
-//建立Schema規則
+// 建立Schema規則
 const userSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
@@ -11,5 +11,5 @@ const userSchema = new Schema({
   createdAt: { type: Date, default: Date.now }
 })
 
-//匯出模型樣板
+// 匯出模型樣板
 module.exports = mongoose.model('User', userSchema)

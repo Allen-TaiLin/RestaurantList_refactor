@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const handlebars = require('handlebars')
 const methodOverride = require('method-override')
 const app = express()
+const session = require('express-session')
 
 // 設定資料庫
 require('./config/mongoose')
@@ -30,6 +31,13 @@ handlebars.registerHelper('if_equal', function (job, expectedJob, options) {
   }
   return options.inverse(this);
 })
+
+// Session設定
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 // routes setting
 // 將 request 導入路由器

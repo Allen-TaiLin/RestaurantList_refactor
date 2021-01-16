@@ -24,6 +24,8 @@
 7. [MongoDB](https://www.mongodb.com/) (版本使用 4.2.11) - 資料庫
 8. [Mongoose](https://www.npmjs.com/package/mongoose) (版本使用 5.10.15) - MongoDB 的 ODM 可以在程式中與資料庫溝通
 9. [Method-Override](https://www.npmjs.com/package/method-override) (版本使用 3.0.0) - Express 的 middleware「中介軟體」
+10. [Express-Session](https://www.npmjs.com/package/express-session) (版本使用 1.17.1) - Express的「儲存認證結果」
+11. [Passport](https://www.npmjs.com/package/passport) (版本使用 0.4.1) - Passport.js 是專門用於「使用者認證」
 
 ## Use Tools - 使用工具
 

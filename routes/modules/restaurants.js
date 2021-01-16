@@ -13,8 +13,10 @@ router.get('/new', (req, res) => {
 
 //確定新增
 router.post('/new', (req, res) => {
+  const userId = req.user._id
   // 從 req.body 拿出表單裡的資料
   const options = req.body
+  options.userId = userId
   //建立實例模型
   const restaurantAddNew = new RestaurantData(options)
   // const restaurantAddNew = new RestaurantData({
@@ -37,9 +39,10 @@ router.post('/new', (req, res) => {
 
 //讀取特定資料
 router.get('/:id/detail', (req, res) => {
+  const userId = req.user._id
   //取得restaurant_id
-  const id = req.params.id
-  return RestaurantData.findById(id)  //從資料庫找出相關資料
+  const _id = req.params.id
+  return RestaurantData.findOne({ _id, userId })  //從資料庫找出相關資料
     .lean()  //把資料轉成javascript物件
     .then((restaurant) => res.render('detail', { restaurant }))  //發送至前端樣板
     .catch((error) => console.log(error))  //例外處理
@@ -47,9 +50,10 @@ router.get('/:id/detail', (req, res) => {
 
 //修改頁面
 router.get('/:id/edit', (req, res) => {
+  const userId = req.user._id
   //取得restaurant_id
-  const id = req.params.id
-  return RestaurantData.findById(id)  //從資料庫找出相關資料
+  const _id = req.params.id
+  return RestaurantData.findOne({ _id, userId })  //從資料庫找出相關資料
     .lean()  //把資料轉成javascript物件
     .then((restaurant) => res.render('edit', { restaurant }))  //發送至前端樣板
     .catch((error) => console.log(error))  //例外處理
@@ -57,11 +61,13 @@ router.get('/:id/edit', (req, res) => {
 
 //確定修改
 router.put('/:id', (req, res) => {
+  const userId = req.user._id
   //取得restaurant_id
-  const id = req.params.id
+  const _id = req.params.id
   // 從 req.body 拿出表單裡的資料
   const options = req.body
-  return RestaurantData.findById(id)  //從資料庫找出相關資料
+  options.userId = userId
+  return RestaurantData.findOne({ _id, userId })  //從資料庫找出相關資料
     .then((restaurant) => {
       //對應資料，寫入資料庫
       restaurant = Object.assign(restaurant, options)
@@ -73,9 +79,10 @@ router.put('/:id', (req, res) => {
 
 //確定刪除
 router.delete('/:id', (req, res) => {
+  const userId = req.user._id
   //取得restaurant_id
-  const id = req.params.id
-  RestaurantData.findById(id)  //從資料庫找出相關資料
+  const _id = req.params.id
+  RestaurantData.findOne({ _id, userId }) //從資料庫找出相關資料
     .then((restaurant) => restaurant.remove())  //刪除資料
     .then(() => res.redirect('/'))  //導向首頁
     .catch((error) => console.log(error))  //例外處理

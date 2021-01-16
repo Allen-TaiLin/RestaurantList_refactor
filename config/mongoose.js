@@ -1,7 +1,7 @@
 // 載入 mongoose
 const mongoose = require('mongoose')
 //連線字串
-mongoose.connect('mongodb://localhost/restaurant-list-refactor', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/restaurant-list-refactor', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 // 取得資料庫連線狀態
 const db = mongoose.connection
 // 連線異常

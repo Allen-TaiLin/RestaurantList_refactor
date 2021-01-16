@@ -7,10 +7,11 @@ const RestaurantData = require('../../models/restaurant')
 // 定義路由
 //搜尋功能
 router.get('/', (req, res) => {
+  const userId = req.user._id
   //取得keyword
   const keyword = req.query.keyword
   //資料庫撈資料
-  RestaurantData.find()
+  RestaurantData.find({ userId })
     .lean()
     .then((restaurants) => {
       //查詢符合keyword的店家

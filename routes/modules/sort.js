@@ -7,12 +7,13 @@ const RestaurantData = require('../../models/restaurant')
 // 定義路由
 //排序功能
 router.get('/', (req, res) => {
+  const userId = req.user._id
   //取得排序項目
   const item = req.query.item
   //取得排序方式
   const sortBy = req.query.sort
   //資料庫撈資料
-  RestaurantData.find()
+  RestaurantData.find({ userId })
     .lean()
     .sort({ [item]: sortBy })  //排序
     .then((restaurants) => res.render('index', { restaurants }))  //將資料傳給 index 樣板

@@ -13,16 +13,20 @@ const sort = require('./modules/sort')
 // 引入 users 模組程式碼
 const users = require('./modules/users')
 
-// 將網址結構符合 / 字串的 request 導向 home 模組
-router.use('/', home)
+// 掛載 middleware，加入驗證程序
+const { authenticator } = require('../middleware/auth')
+
+
 // 將網址結構符合 /restaurants 字串開頭的 request 導向 restaurants 模組
-router.use('/restaurants', restaurants)
+router.use('/restaurants', authenticator, restaurants)
 // 將網址結構符合 /search 字串的 request 導向 search 模組
-router.use('/search', search)
+router.use('/search', authenticator, search)
 // 將網址結構符合 /sort 字串的 request 導向 sort 模組
-router.use('/sort', sort)
+router.use('/sort', authenticator, sort)
 // 將網址結構符合 /users 字串的 request 導向 sort 模組
 router.use('/users', users)
+// 將網址結構符合 / 字串的 request 導向 home 模組
+router.use('/', authenticator, home)
 
 // 匯出路由器
 module.exports = router

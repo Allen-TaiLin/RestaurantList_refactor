@@ -1,17 +1,19 @@
-# 餐廳清單的 CRUD 功能(重構) - Restaurant Menu 3.0
+# 餐廳清單的 CRUD 功能(重構) - Restaurant Menu 5.0
 
 提供使用者新增、刪除及修改餐廳的資訊，例如:餐廳類別、地址、評分、描述...等，新增查詢列與排序下拉選單。
+![](/3_1A1.PNG)
 ![](/2_3A8_RestaurantList_refactor.png)
 
 ## Features - 產品功能
 
+- 使用者可以註冊帳號 (使用Facebook登入)
 - 使用者可以新增一家餐廳
 - 使用者可以瀏覽一家餐廳的詳細資訊
-- 使用者可以瀏覽全部所有餐廳
+- 使用者可以瀏覽收藏的餐廳資料
 - 使用者可以修改一家餐廳的資訊
 - 使用者可以刪除一家餐廳  
-- 使用者可以排序全部餐廳
-- 使用者可以查詢關鍵字
+- 使用者可以排序收藏的餐廳資料
+- 使用者可以查詢關鍵字 (餐廳名稱、料理類別)
 
 ## Environment SetUp - 環境建置
 
@@ -42,7 +44,7 @@
 1. 開啟終端機(Terminal) 或 (Git Bash) 到欲存放專案的本機位置並執行:
 
 ```
-git clone https://github.com/Allen-TaiLin/RestaurantList_refactor_Remote.git
+git clone https://github.com/Allen-TaiLin/Restaurant_List_5.0_Remote.git
 ```
 
 2. 開啟終端機(Terminal) 或 (Git Bash)，進入到存放此專案的資料夾

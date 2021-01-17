@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 
 // 建立Schema規則
 const userSchema = new Schema({
-  name: { type: String, required: true },
+  name: { type: String, required: false },
   email: { type: String, required: true },
   password: { type: String, required: true },
   createdAt: { type: Date, default: Date.now }

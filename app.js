@@ -9,11 +9,15 @@ const session = require('express-session')
 // 載入設定檔，要寫在 express-session 以後
 const usePassport = require('./config/passport')
 const flash = require('connect-flash')
+// 判別開發環境
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 // 設定資料庫
 require('./config/mongoose')
 //const RestaurantData = require('./models/restaurant')
-const port = 3000
+const port = process.env.PORT
 // 引用路由器
 const routes = require('./routes/index')
 
@@ -37,7 +41,7 @@ handlebars.registerHelper('if_equal', function (job, expectedJob, options) {
 
 // Session設定
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))

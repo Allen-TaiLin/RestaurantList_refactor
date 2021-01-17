@@ -12,6 +12,8 @@ const search = require('./modules/search')
 const sort = require('./modules/sort')
 // 引入 users 模組程式碼
 const users = require('./modules/users')
+// 引入 auth 模組程式碼
+const auth = require('./modules/auth')
 
 // 掛載 middleware，加入驗證程序
 const { authenticator } = require('../middleware/auth')
@@ -25,6 +27,8 @@ router.use('/search', authenticator, search)
 router.use('/sort', authenticator, sort)
 // 將網址結構符合 /users 字串的 request 導向 sort 模組
 router.use('/users', users)
+// 將網址結構符合 /auth 字串的 request 導向 auth 模組
+router.use('/auth', auth)
 // 將網址結構符合 / 字串的 request 導向 home 模組
 router.use('/', authenticator, home)
 

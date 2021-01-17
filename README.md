@@ -28,7 +28,7 @@
 11. [Passport](https://www.npmjs.com/package/passport) (版本使用 0.4.1) - Passport.js 是專門用於「使用者認證」
 12. [Connect-Flash](https://www.npmjs.com/package/connect-flash) (版本使用 0.1.1) - 提示訊息
 13. [Bcrypt.js](https://www.npmjs.com/package/bcryptjs) (版本使用 2.4.3) -  Bcrypt.js 是專門用於「雜湊使用者的註冊密碼」
-
+14. [dotenv](https://www.npmjs.com/package/dotenv) (版本使用 8.2.0) -  隱藏重要資訊
 ## Use Tools - 使用工具
 
 - [Visual Studio Code](https://visualstudio.microsoft.com/zh-hant/) - 開發環境

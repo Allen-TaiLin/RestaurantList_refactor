@@ -44,7 +44,7 @@
 1. 開啟終端機(Terminal) 或 (Git Bash) 到欲存放專案的本機位置並執行:
 
 ```
-git clone https://github.com/Allen-TaiLin/Restaurant_List_5.0_Remote.git
+git clone https://github.com/Allen-TaiLin/RestaurantList_refactor_Remote.git
 ```
 
 2. 開啟終端機(Terminal) 或 (Git Bash)，進入到存放此專案的資料夾

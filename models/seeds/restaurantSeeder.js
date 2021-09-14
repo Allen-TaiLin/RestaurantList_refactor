@@ -10,26 +10,26 @@ const RestaurantData = require('../restaurant')
 // 載入 User model
 const User = require('../user')
 
-const SEED_USERS = [
-  {
-    name: 'Tom',
-    email: 'user1@example.com',
-    password: '12345678'
-  },
-  {
-    name: 'Jerry',
-    email: 'user2@example.com',
-    password: '12345678'
-  }
-]
-
+// const SEED_USERS = [
+//   {
+//     name: 'Tom',
+//     email: 'user1@example.com',
+//     password: '12345678'
+//   },
+//   {
+//     name: 'Jerry',
+//     email: 'user2@example.com',
+//     password: '12345678'
+//   }
+// ]
 
 //範本資料
+const seed_users = require('../../userSample.json')
 const restaurantList = require('../../restaurant.json').results
 
 //新增種子資料
 db.once('open', () => {
-  return Promise.all(SEED_USERS.map((item) => {
+  return Promise.all(seed_users.map((item) => {
     //查詢種子資料是否已在資料庫
     User.find({ email: item.email })
       .then((haveUser) => {

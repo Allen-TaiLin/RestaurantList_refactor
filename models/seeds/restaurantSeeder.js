@@ -54,14 +54,14 @@ db.once('open', () => {
           .then((user) => {
             console.log('開始準備匯入餐廳的種子資料')
             if (user.name === 'Tom') {
-              return Promise.all(Array.from({ length: 3 }, (item, index) => {
+              return Promise.all(Array.from({ length: 9 }, (item, index) => {
                 console.log('user1-', user)
                 return RestaurantData.create({ ...restaurantList[index], userId: user._id })
               }))
             } else {
-              return Promise.all(Array.from({ length: 3 }, (item, index) => {
+              return Promise.all(Array.from({ length: 9 }, (item, index) => {
                 console.log('user2-', user)
-                return RestaurantData.create({ ...restaurantList[index + 3], userId: user._id })
+                return RestaurantData.create({ ...restaurantList[index + 9], userId: user._id })
               }))
             }
           })

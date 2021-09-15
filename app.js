@@ -61,6 +61,8 @@ app.use((req, res, next) => {
 // routes setting
 // 將 request 導入路由器
 app.use(routes)
+// 設定靜態檔案路徑，將路由 /upload 開頭的導向 /upload 底下的圖片位置
+app.use('/upload', express.static(__dirname + '/upload'))
 
 // start and listen on the Express server
 app.listen(port, () => {

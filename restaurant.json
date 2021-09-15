@@ -108,7 +108,7 @@
       "id": 9,
       "name": "一品花雕雞-市民旗艦店",
       "name_en": "一品花雕雞 市民旗艦店",
-      "category": "火鍋餐廳",
+      "category": "中式餐廳",
       "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5635/01.jpg",
       "location": "105台北市松山區市民大道四段207號",
       "phone": "+886225700388",
@@ -233,6 +233,32 @@
       "rating": 4.7,
       "description": "我們希望帶給您的，不只是啤酒，有美食，還有一份對生活的熱情。 義大利語「Bravo」的原意─「喝采」、「讚揚」， 我想著如果有一個大家都能輕鬆品嚐美酒、享受美食的地方，那就真的是太棒了！ 因為這個念頭，加上一股對比利時啤酒的熱情， 於是「Bravo Beer布娜飛比利時啤酒餐廳」在2006年誕生了...",
       "region": "松山區"
+    },
+    {
+      "id": 19,
+      "name": "大道創意料理快炒",
+      "name_en": "大道創意料理快炒",
+      "category": "中式餐廳",
+      "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5635/01.jpg",
+      "location": "104台北市中山區市民大道三段35號",
+      "phone": "+886227518988",
+      "google_map": "https://goo.gl/maps/stAhFoavct7PkpyM9",
+      "rating": 4.0,
+      "description": "熱炒店除了價格平實，其多樣化的菜色更能反映出台灣人充滿彈性、靈活多變的精神，融合川菜、台菜、日本料理的多元文化，講求速度的大火快炒烹調方式與沿襲自海產店的各式海鮮料理，都是熱炒店菜色的特別之處。",
+      "region": "中山區"
+    },
+    {
+      "id": 20,
+      "name": "Broccoli beer韓國餐酒食堂",
+      "name_en": "Broccoli beer",
+      "category": "異國風味",
+      "image": "https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/5633/07.jpg",
+      "location": "10491台北市中山區松江路40號1樓",
+      "phone": "+886225236878",
+      "google_map": "https://goo.gl/maps/8r6zXFnJxjRfcqA57",
+      "rating": 4.3,
+      "description": "韓國料理以辛辣醃漬、煎烤、加鹽清炒、鍋煮、生吃這五者為主要呈現形式；特點是少油膩、少加工，還原食材原本的形狀而不加過多的修飾，喜歡發酵類食品及天然調味料，兼顧重口味和保持健康。",
+      "region": "中山區"
     }
   ]
 }

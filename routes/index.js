@@ -17,10 +17,14 @@ const auth = require('./modules/auth')
 
 // 掛載 middleware，加入驗證程序
 const { authenticator } = require('../middleware/auth')
+// 上傳圖片設定
+const multer = require('multer')
+// 指定上傳到暫存資料夾(自訂名稱)
+const upload = multer({ dest: 'temp/' })
 
 
 // 將網址結構符合 /restaurants 字串開頭的 request 導向 restaurants 模組
-router.use('/restaurants', authenticator, restaurants)
+router.use('/restaurants', authenticator, upload.single('imageFile'), restaurants)
 // 將網址結構符合 /search 字串的 request 導向 search 模組
 router.use('/search', authenticator, search)
 // 將網址結構符合 /sort 字串的 request 導向 sort 模組

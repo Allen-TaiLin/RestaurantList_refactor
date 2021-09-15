@@ -3,6 +3,7 @@
     "exphbs",
     "javascripts",
     "mongodb",
+    "originalname",
     "outdent",
     "resave",
     "robo"

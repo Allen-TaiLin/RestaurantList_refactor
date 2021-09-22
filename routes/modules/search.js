@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 // 引用 restaurant model
 const RestaurantData = require('../../models/restaurant')
+const pageList = require('../../config/pageList.js')
 
 // 定義路由
 //搜尋功能
@@ -18,8 +19,21 @@ router.get('/', (req, res) => {
       restaurants = restaurants.filter((item) => {
         return (item.name.toLowerCase().trim().includes(keyword.toLowerCase().trim())) || (item.category.toLowerCase().trim().includes(keyword.toLowerCase().trim()))
       })
+
+      // 分頁資料加工
+      const result = pageList.pagination(req.query.page, restaurants)
       //讀取index檔案、渲染畫面
-      return res.render('index', { restaurants, keyword })
+      return res.render('index', {
+        restaurants: result.data_slice,
+        keyword: keyword,
+        page: result.page,
+        totalPage: result.totalPage,
+        prev: result.prev,
+        next: result.next,
+        item: userId,
+        sort: 'asc',
+        searchFlog: true
+      })
     })
     .catch((error) => console.log(error))
 })

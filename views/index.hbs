@@ -93,4 +93,55 @@
       </div>
     </div>
   </div>
+
+  <nav aria-label="Page navigation example">
+    <ul class="pagination row d-flex justify-content-center">
+
+      {{#if searchFlog}}
+      <li class="page-item">
+        <a class="page-link" href="search?keyword={{keyword}}&sort={{sort}}&page={{prev}}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {{else}}
+      <li class="page-item">
+        <a class="page-link" href="/sort?item={{item}}&sort={{sort}}&page={{prev}}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      {{/if}}
+
+      {{#each totalPage}}
+      {{#if_equal this ../page}}
+      <li class="page-item active"><a class="page-link" href="#">{{this}}</a></li>
+      {{else}}
+      {{#if ../searchFlog}}
+      <li class="page-item">
+        <a class="page-link" href="/search?keyword={{../keyword}}&sort={{../sort}}&page={{this}}">{{this}}</a>
+      </li>
+      {{else}}
+      <li class="page-item">
+        <a class="page-link" href="/sort?item={{../item}}&sort={{../sort}}&page={{this}}">{{this}}</a>
+      </li>
+      {{/if}}
+
+      {{/if_equal}}
+      {{/each}}
+
+      {{#if searchFlog}}
+      <li class="page-item">
+        <a class="page-link" href="/search?keyword={{keyword}}&sort={{sort}}&page={{next}}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {{else}}
+      <li class="page-item">
+        <a class="page-link" href="/sort?item={{item}}&sort={{sort}}&page={{next}}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      {{/if}}
+
+    </ul>
+  </nav>
 </div>

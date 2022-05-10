@@ -7,6 +7,9 @@ const RestaurantData = require('../../models/restaurant')
 const fs = require('fs')
 const restaurant = require('../../models/restaurant')
 
+const imgur = require('imgur-node-api')
+const IMGUR_CLIENT_ID = process.env.IMGUR_CLIENT_ID
+
 //// 定義路由
 // 新增頁面
 router.get('/new', (req, res) => {
@@ -27,23 +30,23 @@ router.post('/new', (req, res) => {
   const restaurantAddNew = new RestaurantData(options)
   const { file } = req // const file = req.file
 
+  // 將圖片檔案上傳到第三方留網址，(三)
   // 如果上傳檔案存在
   if (file) {
-    // 從 file.path 讀取檔案(temp)
-    fs.readFile(file.path, (err, data) => {
+    // 設定 Client ID
+    imgur.setClientID(IMGUR_CLIENT_ID)
+    // 將圖片上傳到第三方網址
+    imgur.upload(file.path, (err, img) => {
       if (err) console.log('Error:' + err)
-      // 將檔案 (data) 寫入到 upload/ 資料夾
-      fs.writeFile(`upload/${file.originalname}`, data, () => {
-        // 將檔案路徑寫入進資料庫
-        restaurantAddNew.image = file ? `/upload/${file.originalname}` : options.image
-        // 寫入資料庫
-        return restaurantAddNew.save()
-          .then((result) => {
-            req.flash('success_msg', 'restaurant was successfully created')
-            return res.redirect('/')  // 導向router
-          })
-          .catch((error) => console.log(error))  // 例外處理
-      })
+      // 將檔案網址寫入進資料庫
+      restaurantAddNew.image = file ? img.data.link : options.image
+      // 寫入資料庫
+      return restaurantAddNew.save()
+        .then((result) => {
+          req.flash('success_msg', 'restaurant was successfully created')
+          return res.redirect('/')  // 導向router
+        })
+        .catch((error) => console.log(error)) // 例外處理
     })
   } else {
     return restaurantAddNew.save()  // 寫入資料庫
@@ -54,6 +57,35 @@ router.post('/new', (req, res) => {
       .catch((error) => console.log(error))  // 例外處理
   }
 
+  //具有上傳檔案內容，(二)
+  // // 如果上傳檔案存在
+  // if (file) {
+  //   // 從 file.path 讀取檔案(temp)
+  //   fs.readFile(file.path, (err, data) => {
+  //     if (err) console.log('Error:' + err)
+  //     // 將檔案 (data) 寫入到 upload/ 資料夾
+  //     fs.writeFile(`upload/${file.originalname}`, data, () => {
+  //       // 將檔案路徑寫入進資料庫
+  //       restaurantAddNew.image = file ? `/upload/${file.originalname}` : options.image
+  //       // 寫入資料庫
+  //       return restaurantAddNew.save()
+  //         .then((result) => {
+  //           req.flash('success_msg', 'restaurant was successfully created')
+  //           return res.redirect('/')  // 導向router
+  //         })
+  //         .catch((error) => console.log(error))  // 例外處理
+  //     })
+  //   })
+  // } else {
+  //   return restaurantAddNew.save()  // 寫入資料庫
+  //     .then((result) => {
+  //       req.flash('success_msg', 'restaurant was successfully created')
+  //       return res.redirect('/')
+  //     })
+  //     .catch((error) => console.log(error))  // 例外處理
+  // }
+
+  //簡單上傳字串內容，(一)
   //建立實例模型
   //// const restaurantAddNew = new RestaurantData(options)
   // const restaurantAddNew = new RestaurantData({
@@ -112,28 +144,48 @@ router.put('/:id', (req, res) => {
 
   // 如果上傳檔案存在
   if (file) {
-    // 從 file.path 讀取檔案(temp)
-    fs.readFile(file.path, (err, data) => {
+    // 設定 Client ID
+    imgur.setClientID(IMGUR_CLIENT_ID)
+    // 將圖片上傳到第三方網址
+    imgur.upload(file.path, (err, img) => {
       if (err) console.log('Error:', err)
-      // 將檔案 (data) 寫入到 upload/ 資料夾
-      fs.writeFile(`upload/${file.originalname}`, data, () => {
-        return RestaurantData.findOne({ _id, userId })  // 從資料庫找出相關資料
-          .then((restaurant) => {
-            // 記錄舊資料
-            const oldImage = restaurant.image
-            // 使用 Object.assign 物件淺拷貝
-            restaurant = Object.assign(restaurant, options)
-            restaurant.image = file ? `/upload/${file.originalname}` : oldImage
-            // 對應資料，寫入資料庫
-            return restaurant.save()
-          })
-          .then((result) => {
-            req.flash('success_msg', 'restaurant was successfully to update')
-            return res.redirect(`/restaurants/${_id}/detail`)  // 導向router
-          })
-          .catch((error) => console.log(error))  // 例外處理
-      })
+      return RestaurantData.findOne({ _id, userId })  // 從資料庫找出相關資料
+        .then((restaurant) => {
+          // 記錄舊資料
+          const oldImage = restaurant.image
+          // 使用 Object.assign 物件淺拷貝
+          restaurant = Object.assign(restaurant, options)
+          restaurant.image = file ? img.data.link : oldImage
+          // 對應資料，寫入資料庫
+          return restaurant.save()
+        }).then((result) => {
+          req.flash('success_msg', 'restaurant was successfully to update')
+          return res.redirect(`/restaurants/${_id}/detail`) // 導向router
+        })
+        .catch((err) => console.log(error)) // 例外處理
     })
+    // // 從 file.path 讀取檔案(temp)
+    // fs.readFile(file.path, (err, data) => {
+    //   if (err) console.log('Error:', err)
+    //   // 將檔案 (data) 寫入到 upload/ 資料夾
+    //   fs.writeFile(`upload/${file.originalname}`, data, () => {
+    //     return RestaurantData.findOne({ _id, userId })  // 從資料庫找出相關資料
+    //       .then((restaurant) => {
+    //         // 記錄舊資料
+    //         const oldImage = restaurant.image
+    //         // 使用 Object.assign 物件淺拷貝
+    //         restaurant = Object.assign(restaurant, options)
+    //         restaurant.image = file ? `/upload/${file.originalname}` : oldImage
+    //         // 對應資料，寫入資料庫
+    //         return restaurant.save()
+    //       })
+    //       .then((result) => {
+    //         req.flash('success_msg', 'restaurant was successfully to update')
+    //         return res.redirect(`/restaurants/${_id}/detail`)  // 導向router
+    //       })
+    //       .catch((error) => console.log(error))  // 例外處理
+    //   })
+    // })
   } else {
     return RestaurantData.findOne({ _id, userId })
       .then((restaurant) => {
